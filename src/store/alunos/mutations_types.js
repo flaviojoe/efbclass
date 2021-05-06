@@ -1,0 +1,3 @@
+export const SETALUNO = "SETALUNO";
+export const SETFOTOPERFIL = "SETFOTOPERFIL";
+export const SETLOADING = "SETLOADING";

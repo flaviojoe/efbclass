@@ -1,0 +1,3 @@
+export const SETINFORMATIVOS = "SETINFORMATIVOS";
+export const SETLOADING = "SETLOADING";
+export const SETSEARCH = "SETSEARCH";
