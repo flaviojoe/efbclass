@@ -11,7 +11,7 @@ requisicao.interceptors.request.use(
   config => {
     let token = getToken();
     if (token) {
-      console.log('getToken => ', token);
+      // console.log('getToken => ', token);
       config.headers["Authorization"] = "Token " + token;
     }
     return config;

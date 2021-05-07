@@ -37,7 +37,7 @@ export const linksAluno = [
   {
     title: "Configurações",
     icon: "fas fa-user-cog",
-    link: "/"
+    link: "/configuracao"
   }
 ];
 

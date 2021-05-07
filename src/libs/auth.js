@@ -5,7 +5,6 @@ import { LocalStorage } from "quasar";
 
 export function getToken() {
   let user = Store().state.usuarios.user;
-  console.log(user);
   return user.hasOwnProperty("token") ? user.token : "";
 }
 

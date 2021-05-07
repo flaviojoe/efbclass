@@ -71,28 +71,33 @@
     </q-footer>
 
     <q-page-container class="container_principal" v-if="$q.screen.xs || $q.platform.is.mobile">
-      <transition
-        appear
-        enter-active-class="animated fadeInLeft"
-        leave-active-class="animated fadeOutRight"
-        mode="out-in"
-        :duration="1000"
-      >
-        <router-view/>
-      </transition>
+      <q-pull-to-refresh @refresh="refresh">
+        <transition
+          appear
+          enter-active-class="animated fadeInLeft"
+          leave-active-class="animated fadeOutRight"
+          mode="out-in"
+          :duration="1000"
+        >
+          <router-view/>
+        </transition>
+      </q-pull-to-refresh>
     </q-page-container>
 
     <q-page-container class="container_principal" v-else>
-      <transition
-        appear
-        enter-active-class="animated fadeIn"
-        leave-active-class="animated fadeOut"
-        mode="out-in"
-        :duration="500"
-      >
-        <router-view/>
-      </transition>
+      <q-pull-to-refresh @refresh="refresh">
+        <transition
+          appear
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+          mode="out-in"
+          :duration="500"
+        >
+          <router-view/>
+        </transition>
+      </q-pull-to-refresh>
     </q-page-container>
+
   </q-layout>
 </template>
 
@@ -141,6 +146,12 @@ export default {
     },
     init() {
       this.avatarLocal = Object.keys(this.user).length > 0 && this.user.hasOwnProperty("foto_perfil") ? this.user.foto_perfil : utils.avatarPadrao;
+    },
+    refresh(done) {
+      setTimeout(() => {
+        location.reload();
+        done();
+      }, 1000);
     }
   },
   beforeRouteUpdate(to, from, next) {

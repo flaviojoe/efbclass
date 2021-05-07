@@ -1,6 +1,7 @@
 import { SETLOADING, SETRANK, SETRANKS } from "src/store/dashboard/mutations_types";
 import { ERRO, notificacao } from "src/libs/notifications";
 import DashboardServices from "src/services/DashboardServices";
+import loading from "src/libs/loading";
 
 export function setLoading({commit}, payload) {
   commit(SETLOADING, payload);
@@ -8,7 +9,7 @@ export function setLoading({commit}, payload) {
 
 export async function getRanks({commit}) {
   return await new Promise((resolve, reject) => {
-    commit(SETLOADING, true);
+    loading.show()
     DashboardServices.getRanks()
       .then(res => {
         commit(SETRANKS, res);
@@ -19,14 +20,14 @@ export async function getRanks({commit}) {
         reject(error);
       })
       .finally(() => {
-        commit(SETLOADING, false);
+        loading.hide()
       });
   });
 }
 
 export async function getRankUsuarioPorCurso({commit}, payload) {
   return await new Promise((resolve, reject) => {
-    commit(SETLOADING, true);
+    loading.show()
     DashboardServices.getRankUsuarioPorCurso(payload)
       .then(res => {
         commit(SETRANK, res);
@@ -37,7 +38,7 @@ export async function getRankUsuarioPorCurso({commit}, payload) {
         reject(error);
       })
       .finally(() => {
-        commit(SETLOADING, false);
+        loading.hide()
       });
   });
 }

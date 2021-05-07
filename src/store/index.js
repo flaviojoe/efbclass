@@ -15,10 +15,30 @@ import configuracoes from "./configuracoes";
 import provas from "./provas";
 import informativos from "./informativos";
 import notificacoes from "./notificacoes";
-import dashboards from './dashboard'
+import dashboards from "./dashboard";
 
 const ls = new SecureLS({isCompression: false});
 Vue.use(Vuex);
+
+const usuariosState = createPersistedState({
+  key: '3f8c1455u534',
+  paths: ["usuarios"],
+  storage: {
+    getItem: key => ls.get(key),
+    setItem: (key, value) => ls.set(key, value),
+    removeItem: key => ls.remove(key)
+  }
+});
+
+const layoutState = createPersistedState({
+  key: '3f8c145514y0u7',
+  paths: ["layout"],
+  storage: {
+    getItem: key => ls.get(key),
+    setItem: (key, value) => ls.set(key, value),
+    removeItem: key => ls.remove(key)
+  }
+});
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
@@ -34,15 +54,16 @@ export default function (/* { ssrContext } */) {
       notificacoes,
       dashboards
     },
-    plugins: [
-      createPersistedState({
-        storage: {
-          getItem: key => ls.get(key),
-          setItem: (key, value) => ls.set(key, value),
-          removeItem: key => ls.remove(key),
-        },
-      })
-    ],
+    plugins: [usuariosState, layoutState],
+    // plugins: [
+    //   createPersistedState({
+    //     storage: {
+    //       getItem: key => ls.get(key),
+    //       setItem: (key, value) => ls.set(key, value),
+    //       removeItem: key => ls.remove(key),
+    //     },
+    //   })
+    // ],
     // enable strict mode (adds overhead!)
     // for dev mode only
     strict: process.env.DEBUGGING

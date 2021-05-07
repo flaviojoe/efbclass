@@ -10,7 +10,7 @@ export default {
 </script>
 
 <style lang="scss">
-.modo_mobile {
+.mobile {
   background-color: #F1F5F8;
 }
 </style>

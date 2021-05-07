@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="container_dashboard" :class="($q.screen.xs || $q.platform.is.mobile) ? '' : ['q-pa-md', 'container-dashboard-ds']">
+    <div class="container_dashboard"
+         :class="($q.screen.xs || $q.platform.is.mobile) ? '' : ['q-pa-md', 'container-dashboard-ds']">
       <div class="row"
            v-if="Object.keys(topRanks).length"
       >

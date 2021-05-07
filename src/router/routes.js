@@ -42,8 +42,17 @@ const routes = [
     children: [
       {
         path: "",
+        redirect: '/autenticacao'
+      },
+      {
+        path: "/home",
         component: () => import("pages/Index.vue"),
         name: "Home"
+      },
+      {
+        path: "/configuracao",
+        component: () => import("pages/Index.vue"),
+        name: "Configurações"
       },
       {
         path: "/dashboard",
@@ -86,11 +95,6 @@ const routes = [
         component: () => import("pages/PageProvas.vue"),
         name: "Provas disponíveis"
       },
-      // {
-      //   path: "/prova/questionario",
-      //   component: () => import("pages/PageQuestionario.vue"),
-      //   name: "Questionario"
-      // },
       {
         path: "/informativos",
         component: () => import("pages/PageInformativos.vue"),

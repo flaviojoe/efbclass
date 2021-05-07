@@ -28,7 +28,7 @@ export async function loginUsuario({commit, dispatch}, payload) {
       .then(response => {
         dispatch("setUser", response);
         setTimeout(() => {
-          this.$router.push("/").catch(err => {
+          this.$router.push("/home").catch(err => {
           });
         }, 1000);
         resolve();
