@@ -34,7 +34,9 @@
           />
         </div>
       </div>
-      <GradeCartoesCursos :cursos="cursosPorCategoria"/>
+      <div v-if="cursosLocal.length">
+        <GradeCartoesCursos :cursos="cursosLocal"/>
+      </div>
     </div>
 
     <q-dialog v-model="modalCategorias" persistent/>
@@ -43,7 +45,9 @@
             :class="['cartao_categorias_cursos', modalCategorias ? ['absolute', 'z-top'] : '']"
     >
       <q-card-section class="q-pt-md">
-        <CategoriasFiltros :categorias="todasCategorias" @close="nextMorphCategoria"/>
+        <div v-if="categoriasLocal.length">
+          <CategoriasFiltros :categorias="categoriasLocal" @close="nextMorphCategoria"/>
+        </div>
       </q-card-section>
       <q-card-actions align="right" class="text-primary">
         <q-btn flat label="Fechar" @click="nextMorphCategoria"/>
@@ -71,7 +75,9 @@ export default {
   data() {
     return {
       morphGroupModelCategoria: "btnCategoria",
-      modalCategorias: false
+      modalCategorias: false,
+      cursosLocal: [],
+      categoriasLocal: []
     };
   },
   methods: {
@@ -80,6 +86,8 @@ export default {
       await this.getCategorias();
       this.setSearch("");
       await this.getTodosCursosPorCategorias();
+      this.cursosLocal = this.cursosPorCategoria;
+      this.categoriasLocal = this.todasCategorias;
     },
     nextMorphCategoria() {
       this.modalCategorias = !this.modalCategorias;

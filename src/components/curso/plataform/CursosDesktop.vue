@@ -3,19 +3,19 @@
     <div class="container_img_cartao_curso row justify-center">
       <q-card class="q-pa-md">
         <div class="row">
-          <div class="col-6">
+          <div class="col-sm-7 col-6">
             <div class="text-h5 text-weight-bold text-white">Encontre seu curso favorito aqui</div>
           </div>
         </div>
         <div class="row q-mt-md">
-          <div class="col-6">
+          <div class="col-sm-6 col-md-5 col-6">
             <div class="text-subtitle2 text-weight-regular text-grey-3">Já está fazendo algum curso? Clique no botão
               abaixo para ir para os seus cursos!
             </div>
           </div>
         </div>
         <div class="row q-mt-md">
-          <div class="col-6">
+          <div class="col-sm-9 col-6">
             <q-btn
               color="white"
               text-color="black"
@@ -213,10 +213,10 @@ export default {
 <style lang="scss" scoped>
 .container_cursos_desktop::v-deep {
   .container_img_cartao_curso {
-    margin-left: calc(5% - 250px);
+    //margin-left: calc(5% - 250px);
 
     .q-card {
-      width: 40vw;
+      width: 100vw;
       height: 220px;
       border-radius: 30px;
       box-shadow: none;
@@ -228,7 +228,7 @@ export default {
       width: 35vw;
       height: 280px;
       position: absolute;
-      left: 50%;
+      left: 52%;
       top: -20px;
     }
   }
@@ -250,4 +250,10 @@ export default {
   }
 
 }
+
+//@media (max-width: 320px) {
+//  .container_img_cartao_curso {
+//    margin-left: calc(5% - 250px);
+//  }
+//}
 </style>
