@@ -5,11 +5,6 @@ export const linksAluno = [
     link: "/dashboard"
   },
   {
-    title: "Informativos",
-    icon: "fas fa-book",
-    link: "/informativos"
-  },
-  {
     title: "Cursos",
     icon: "fas fa-graduation-cap",
     link: "/cursos"
@@ -23,6 +18,11 @@ export const linksAluno = [
     title: "Provas",
     icon: "fas fa-file-alt",
     link: "/provas_disponiveis"
+  },
+  {
+    title: "Informativos",
+    icon: "fas fa-book",
+    link: "/informativos"
   },
   {
     title: "Conta",

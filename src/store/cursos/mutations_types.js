@@ -1,4 +1,6 @@
 export const SETCURSOS = "SETCURSOS";
+export const SETCURSOSPAGINACAO = "SETCURSOSPAGINACAO";
+export const SETPAGINACAO = "SETPAGINACAO";
 export const SETSEARCH = "SETSEARCH";
 export const SETCURSO = "SETCURSO";
 export const SETLOADING = "SETLOADING";

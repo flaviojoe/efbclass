@@ -5,9 +5,11 @@ import {
   SETCATEGORIAS,
   SETCURSO,
   SETCURSOS,
+  SETCURSOSPAGINACAO,
   SETHISTORICOAULA,
   SETLOADING,
   SETLOADINGCATEGORIA,
+  SETPAGINACAO,
   SETSEARCH
 } from "./mutations_types";
 import CategoriaServices from "src/services/CategoriaServices";
@@ -59,6 +61,25 @@ export async function getTodosCursosPorCategorias({commit, dispatch}) {
   });
 }
 
+export async function getTodosCursosPaginado({commit, dispatch}, payload) {
+  return new Promise((resolve, reject) => {
+    dispatch("setLoading", true);
+    CursoServices.getTodosCursos(payload.query)
+      .then(res => {
+        commit(SETPAGINACAO, payload.pagination);
+        commit(SETCURSOSPAGINACAO, res);
+        resolve();
+      })
+      .catch(error => {
+        notificacao(ERRO, "Erro ao recuperar dados dos cursos!");
+        reject(error);
+      })
+      .finally(() => {
+        dispatch("setLoading", false);
+      });
+  });
+}
+
 export async function getMeusCursos({commit, dispatch}) {
   return new Promise((resolve, reject) => {
     dispatch("setLoading", true);
@@ -82,7 +103,7 @@ export async function getCurso({commit, dispatch}, payload) {
     dispatch("setLoading", true);
     CursoServices.getCurso(payload)
       .then(res => {
-        dispatch('setCurso', res);
+        dispatch("setCurso", res);
         resolve();
       })
       .catch(error => {
@@ -119,7 +140,7 @@ export async function getAulasCurso({commit, dispatch}, payload) {
     dispatch("setLoading", true);
     return CursoServices.getAulasCurso(payload)
       .then(res => {
-        dispatch('setCurso', res);
+        dispatch("setCurso", res);
         resolve();
       })
       .catch(error => {

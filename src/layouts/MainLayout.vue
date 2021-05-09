@@ -5,7 +5,9 @@
     <q-header
       :class="[
         'cabecalho_pagina ',
-        $route.meta.hasOwnProperty('corTextoCabecalho') && $route.meta.corTextoCabecalho === 'text-white' ?
+        ($q.platform.is.mobile || $q.screen.xs) &&
+        $route.meta.hasOwnProperty('corTextoCabecalho') &&
+        $route.meta.corTextoCabecalho === 'text-white' ?
         'bg-primary text-white' : 'bg-transparent text-black'
         ]"
     >

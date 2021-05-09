@@ -5,9 +5,11 @@ import {
   SETCATEGORIAS,
   SETCURSO,
   SETCURSOS,
+  SETCURSOSPAGINACAO,
   SETHISTORICOAULA,
   SETLOADING,
   SETLOADINGCATEGORIA,
+  SETPAGINACAO,
   SETSEARCH
 } from "./mutations_types";
 
@@ -17,6 +19,15 @@ export default {
   },
   [SETCURSOS]: (state, payload) => {
     state.cursos = payload;
+  },
+  [SETCURSOSPAGINACAO]: (state, payload) => {
+    state.cursos = payload.results;
+    state.serverPagination.rowsNumber = payload.count
+  },
+  [SETPAGINACAO]: (state, payload) => {
+    console.log(payload);
+    state.serverPagination = payload;
+    state.loading = false;
   },
   [SETCURSO]: (state, payload) => {
     state.curso = Object.assign({}, payload);
