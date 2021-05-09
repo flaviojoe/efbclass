@@ -31,12 +31,15 @@ export default {
   },
   name: "PageMeusCursos",
   data() {
-    return {};
+    return {
+      meusCursosLocal: []
+    };
   },
   methods: {
     ...mapActions("cursos", ["getMeusCursos"]),
     async init() {
       await this.getMeusCursos();
+      this
     }
   },
   computed: {

@@ -25,6 +25,10 @@ export function setLoading({commit}, payload) {
   commit(SETLOADING, payload);
 }
 
+export function setLoadingCategoria({commit}, payload) {
+  commit(SETLOADINGCATEGORIA, payload);
+}
+
 export function setCategoria({commit}, payload) {
   commit(SETCATEGORIA, payload);
 }
@@ -33,9 +37,13 @@ export function setHistoricoAula({commit}, payload) {
   commit(SETHISTORICOAULA, payload);
 }
 
-export async function getTodosCursosPorCategorias({commit}) {
-  return await new Promise((resolve, reject) => {
-    commit(SETLOADING, true);
+export function setAula({commit}, payload) {
+  commit(SETAULA, payload);
+}
+
+export async function getTodosCursosPorCategorias({commit, dispatch}) {
+  return new Promise((resolve, reject) => {
+    dispatch("setLoading", true);
     CursoServices.getTodosCursosPorCategorias()
       .then(res => {
         commit(SETCURSOS, res);
@@ -46,15 +54,14 @@ export async function getTodosCursosPorCategorias({commit}) {
         reject(error);
       })
       .finally(() => {
-        commit(SETLOADING, false);
+        dispatch("setLoading", false);
       });
   });
 }
 
-export async function getMeusCursos({commit}) {
-  commit(SETCURSOS, []);
+export async function getMeusCursos({commit, dispatch}) {
   return new Promise((resolve, reject) => {
-    commit(SETLOADING, true);
+    dispatch("setLoading", true);
     CursoServices.getMeusCursos()
       .then(res => {
         commit(SETCURSOS, res);
@@ -65,17 +72,17 @@ export async function getMeusCursos({commit}) {
         reject(error);
       })
       .finally(() => {
-        commit(SETLOADING, false);
+        dispatch("setLoading", false);
       });
   });
 }
 
-export async function getCurso({commit}, payload) {
+export async function getCurso({commit, dispatch}, payload) {
   return new Promise((resolve, reject) => {
-    commit(SETLOADING, true);
+    dispatch("setLoading", true);
     CursoServices.getCurso(payload)
       .then(res => {
-        commit(SETCURSO, res);
+        dispatch('setCurso', res);
         resolve();
       })
       .catch(error => {
@@ -83,14 +90,14 @@ export async function getCurso({commit}, payload) {
         reject(error);
       })
       .finally(() => {
-        commit(SETLOADING, false);
+        dispatch("setLoading", false);
       });
   });
 }
 
-export async function getCategorias({commit}) {
+export async function getCategorias({commit, dispatch}) {
   return new Promise((resolve, reject) => {
-    commit(SETLOADINGCATEGORIA, true);
+    dispatch("setLoadingCategoria", true);
     CategoriaServices.getCategorias()
       .then(res => {
         commit(SETCATEGORIAS, res);
@@ -101,18 +108,18 @@ export async function getCategorias({commit}) {
         reject(error);
       })
       .finally(() => {
-        commit(SETLOADINGCATEGORIA, false);
+        dispatch("setLoadingCategoria", false);
       });
   });
 }
 
 
-export async function getAulasCurso({commit}, payload) {
+export async function getAulasCurso({commit, dispatch}, payload) {
   return new Promise((resolve, reject) => {
-    commit(SETLOADING, true);
+    dispatch("setLoading", true);
     return CursoServices.getAulasCurso(payload)
       .then(res => {
-        commit(SETCURSO, res);
+        dispatch('setCurso', res);
         resolve();
       })
       .catch(error => {
@@ -120,15 +127,9 @@ export async function getAulasCurso({commit}, payload) {
         reject(error);
       })
       .finally(() => {
-        setTimeout(() => {
-          commit(SETLOADING, false);
-        }, 1000);
+        dispatch("setLoading", false);
       });
   });
-}
-
-export function setAula({commit}, payload) {
-  commit(SETAULA, payload);
 }
 
 export async function aulaFinalizada({commit, dispatch}, payload) {

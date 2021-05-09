@@ -1,6 +1,6 @@
 <template>
-  <div class="container_prova no-scroll">
-    <div v-if="!loading" :class="[getAprovacao()[2] ? 'img_prova_1' : 'img_prova_0', 'img_prova']"/>
+  <div class="container_prova no-scroll" v-if="!loading">
+    <div :class="[loading ? 'img_prova_padrao' : getAprovacao()[2] ? 'img_prova_1' : 'img_prova_0', 'img_prova']"/>
     <div class="relative-position">
       <q-toolbar-title class="bg-transparent q-pa-md">
         <div class="text-h5 text-center text-weight-bold text-white">
@@ -140,6 +140,10 @@ export default {
 <style lang="scss">
 .container_prova {
   min-height: 100vh;
+
+  .img_prova_padrao {
+    background-color: $primary;
+  }
 
   .img_prova_0 {
     background: url('~assets/naofoidessavez.jpg');

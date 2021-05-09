@@ -15,7 +15,7 @@
         <q-route-tab
           exact
           icon="fas fa-home"
-          to="/"
+          to="/home"
         />
 
         <!--        <q-fab-->
