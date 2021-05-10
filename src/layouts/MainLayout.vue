@@ -1,7 +1,8 @@
 <template>
   <q-layout
+    class="no-scroll"
     :class="!($q.platform.is.mobile || $q.screen.xs) ? 'desktops' : ''"
-    :view="!($q.platform.is.mobile || $q.screen.xs) ? 'lhh Lpr lfr' : 'lhh Lpr lFr'">
+    :view="!($q.platform.is.mobile || $q.screen.xs) ? 'lhh LpR lfr' : 'lhh Lpr lFr'">
     <q-header
       :class="[
         'cabecalho_pagina ',
@@ -12,7 +13,15 @@
         ]"
     >
       <q-toolbar>
-        <q-toolbar-title class="text-weight-bold absolute-center">
+        <q-btn
+          v-if="!($q.screen.xs || $q.platform.is.mobile)"
+          icon="fas fa-bars"
+          flat
+          rounded
+          @click="$q.screen.sm ? menuEsquerdo = !menuEsquerdo : menuMini = !menuMini"/>
+
+        <q-toolbar-title class="text-weight-bold"
+                         :class="$q.screen.xs || $q.platform.is.mobile ? 'absolute-center' : ''">
           {{ $route.name }}
         </q-toolbar-title>
 
@@ -41,9 +50,17 @@
           <q-item class="logo_item_menu justify-center">
             <q-item-section avatar>
               <img
+                v-if="!menuMini"
                 src="~assets/top_app.png"
                 alt="logo_efbclass"
                 width="150px"
+              >
+              <img
+                v-else
+                src="~assets/logo_branca.png"
+                alt="logo_efbclass"
+                width="50px"
+                class=""
               >
             </q-item-section>
           </q-item>
@@ -65,6 +82,7 @@
         </q-list>
       </q-scroll-area>
     </q-drawer>
+
 
     <MenuBar v-if="$q.screen.xs || $q.platform.is.mobile"/>
 
@@ -189,7 +207,8 @@ export default {
 
       .cabecalho_pagina {
         border-radius: 30px 30px 0 0 !important;
-        box-shadow: 30px 0 0 $primary, -30px 0 0 $primary;;
+        box-shadow: 30px 0 0 $primary, -30px 0 0 $primary;
+        z-index: 100;
       }
 
       .rodape_pagina {
@@ -215,6 +234,40 @@ export default {
           background-color: $primary;
           margin-left: 32px;
           height: 100vh !important;
+        }
+      }
+
+      .menu_nav_esquerdo_sm {
+        .q-drawer {
+          background-color: $primary;
+          margin-left: 0;
+          height: 100vh !important;
+        }
+      }
+
+      .menu_esquerdo_sm {
+        background-color: $primary;
+        color: white;
+        border-radius: 30px 0 0 0;
+
+        .menu_item {
+          border: none !important;
+
+          .q-focus-helper {
+            border-radius: 30px 0 0 30px;
+          }
+        }
+
+        .menu_item_ativo {
+          --tw-bg-opacity: 1;
+          background-color: rgba(241, 245, 248, var(--tw-bg-opacity));
+          color: $primary;
+          border-radius: 30px 0 0 30px;
+
+          .q-focus-helper {
+            background-color: rgba($grey-2, 0.5);
+            border-radius: 30px 0 0 30px;
+          }
         }
       }
 

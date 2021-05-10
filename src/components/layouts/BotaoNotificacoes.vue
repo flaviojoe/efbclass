@@ -2,7 +2,7 @@
   <div>
     <q-btn
       v-if="mostrarNotificacoes"
-      :color="$q.screen.xs ? 'grey-6' : 'grey-2'"
+      :color="$q.screen.xs ? 'grey-6' : 'grey-8'"
       dense
       flat
       icon="fas fa-bell"

@@ -5,6 +5,7 @@ export default function () {
     tituloPagina: "",
     mostrarCabecalho: true,
     mostrarNotificacoes: false,
-    menu: false
+    menu: false,
+    menuDireito: true
   };
 }

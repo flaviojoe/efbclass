@@ -4,7 +4,7 @@
       <q-avatar class="q-mr-md">
         <img :src="avatarLocal" alt="avatar"/>
       </q-avatar>
-      <div>
+      <div v-if="com_nome">
         {{ user.nome }}
       </div>
     </template>
@@ -45,6 +45,12 @@ import utils from "src/libs/utils";
 
 export default {
   name: "DropdownUsuario",
+  props: {
+    com_nome: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       avatarLocal: ""

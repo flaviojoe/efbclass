@@ -1,4 +1,4 @@
-import { SETCLASSCOLORHEADER, SETMENU, SETMOSTRARCABECALHO, SETMOSTRARNOTIFICACAO } from "./mutations_types";
+import { SETCLASSCOLORHEADER, SETMENU, SETMOSTRARCABECALHO, SETMOSTRARNOTIFICACAO, SETMENUDIREITO } from "./mutations_types";
 
 export default {
   [SETCLASSCOLORHEADER]: (state, payload) => {
@@ -12,5 +12,8 @@ export default {
   },
   [SETMENU]: (state, payload) => {
     state.menu = payload;
+  },
+  [SETMENUDIREITO]: (state, payload) => {
+    state.menuDireito = payload;
   }
 };
