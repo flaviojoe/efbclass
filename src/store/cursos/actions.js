@@ -9,6 +9,8 @@ import {
   SETHISTORICOAULA,
   SETLOADING,
   SETLOADINGCATEGORIA,
+  SETLOADINGMATERIAL,
+  SETMATERIAIS,
   SETPAGINACAO,
   SETSEARCH
 } from "./mutations_types";
@@ -29,6 +31,10 @@ export function setLoading({commit}, payload) {
 
 export function setLoadingCategoria({commit}, payload) {
   commit(SETLOADINGCATEGORIA, payload);
+}
+
+export function setLoadingMaterial({commit}, payload) {
+  commit(SETLOADINGMATERIAL, payload);
 }
 
 export function setCategoria({commit}, payload) {
@@ -164,5 +170,24 @@ export async function aulaFinalizada({commit, dispatch}, payload) {
         notificacao(ERRO, "Erro atualizar seu histórico de aula!");
         reject(error);
       });
+  });
+}
+
+export async function getMateriaisDoCurso({commit, dispatch}, payload) {
+  return new Promise((resolve, reject) => {
+    dispatch("setLoadingMaterial", true)
+    CursoServices.getMateriaisDoCurso(payload)
+      .then(res => {
+        commit(SETMATERIAIS, res);
+        resolve();
+      })
+      .catch(error => {
+        notificacao(ERRO, "Erro ao recuperar dados dos materiais do curso!");
+        reject(error);
+      })
+      .finally(() => {
+        dispatch("setLoadingMaterial", false)
+      })
+    ;
   });
 }

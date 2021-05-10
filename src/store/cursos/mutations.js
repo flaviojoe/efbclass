@@ -10,7 +10,8 @@ import {
   SETLOADING,
   SETLOADINGCATEGORIA,
   SETPAGINACAO,
-  SETSEARCH
+  SETSEARCH,
+  SETMATERIAIS, SETLOADINGMATERIAL
 } from "./mutations_types";
 
 export default {
@@ -52,5 +53,11 @@ export default {
   },
   [SETHISTORICOAULA]: (state, payload) => {
     state.curso.topicos[payload.index_topico].aulas[payload.index_aula].historico = [{finalizada: true}];
+  },
+  [SETMATERIAIS]: (state, payload) => {
+    state.materiais = payload
+  },
+  [SETLOADINGMATERIAL]: (state, payload) => {
+    state.loadingMaterial = payload
   }
 };

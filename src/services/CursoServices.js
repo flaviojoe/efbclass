@@ -18,5 +18,8 @@ export default {
   },
   getTodosCursos(payload) {
     return request.get(`cursos\?${ payload }`);
+  },
+  getMateriaisDoCurso(payload) {
+    return request.get(`materiais/${ payload.id }/materiais_curso/`);
   }
 };

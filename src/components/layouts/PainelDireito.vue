@@ -6,18 +6,19 @@
     content-class="menu_direito"
     :class="$q.screen.width >= 840 ? 'menu_nav_direito' : ''"
     overlay
-    :bordered="mostrarPainel"
     :breakpoint="800"
+    :mini="mostrarPainel"
+    :mini-width="30"
   >
     <q-btn
       round
       :class="
-        menuDireito_
+        mostrarPainel
           ? 'btn_mostrar_painel_direita shadow-1'
           : 'btn_ocultar_painel_direita shadow-1'
       "
-      @click="menuDireito_ = !menuDireito_"
-      :icon="!menuDireito_ ? 'fas fa-angle-left' : 'fas fa-angle-right'"
+      @click="$q.screen.width >= 840 ? mostrarPainel = !mostrarPainel : menuDireito_ = !menuDireito_"
+      :icon="mostrarPainel ? 'fas fa-angle-left' : 'fas fa-angle-right'"
     />
     <q-list>
       <q-item-label header class="text-weight-medium text-center text-grey-9">Aulas do curso</q-item-label>
@@ -36,7 +37,13 @@
           clickable
         >
           <q-item-section side>
-            <q-item-label>{{ aula.numero }}</q-item-label>
+            <div class="row items-center">
+              <q-icon
+                :color="aula.hasOwnProperty('historico') &&
+                        aula.historico.length ? 'primary' : 'grey-5'"
+                name="fas fa-check-double" size="13px" class="q-pr-sm"/>
+              <q-item-label>{{ aula.numero }}</q-item-label>
+            </div>
           </q-item-section>
           <q-item-section>
             <q-item-label>
@@ -56,7 +63,6 @@ export default {
   name: "PainelDireito",
   data() {
     return {
-      menuDireitoLocal: false,
       mostrarPainel: true
     };
   },
@@ -92,9 +98,10 @@ export default {
 .menu_nav_direito::v-deep {
   .q-drawer {
     margin-top: -25px;
-    margin-right: 22px;
+    margin-right: 17px;
     height: 99vh !important;
     border-radius: 0 30px 30px 30px;
+    background-color: #F1F5F8;
   }
 }
 
@@ -119,7 +126,7 @@ export default {
   height: 50px;
   position: absolute;
   top: 50%;
-  margin-left: -20px;
+  margin-left: -30px;
   border: $primary solid 1px;
   border-radius: 100%;
   color: white;

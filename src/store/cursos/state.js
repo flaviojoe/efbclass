@@ -19,6 +19,8 @@ export default function () {
       page: 1,
       rowsPerPage: 5,
       rowsNumber: 11
-    }
+    },
+    materiais: [],
+    loadingMaterial: false
   };
 };
