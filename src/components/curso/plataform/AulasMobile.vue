@@ -1,12 +1,29 @@
 <template>
   <div>
     <div class="row">
-      <q-video
-        allowfullscreen
-        :ratio="16 / 9"
-        :src="tratarUrlVimeo()"
-        class="col-12 full-width"
-      />
+      <div v-if="aulaAtual.arquivo_video">
+        <div class="container_video_player"></div>
+        <div class="col-12 full-width">
+          <q-media-player
+            type="video"
+            background-color="black"
+            :autoplay="false"
+            :show-big-play-button="true"
+            :sources="getSourceVideo()"
+            class="aula_video"
+            mobile-mode
+          >
+          </q-media-player>
+        </div>
+      </div>
+      <div v-else>
+        <q-video
+          allowfullscreen
+          :ratio="16 / 9"
+          :src="tratarUrlVimeo()"
+          class="col-12 full-width"
+        />
+      </div>
     </div>
     <div class="q-pa-md">
       <div class="row">
@@ -36,12 +53,12 @@
             indicator-color="primary"
             narrow-indicator
           >
-            <q-tab label="Aulas" name="aulas" />
+            <q-tab label="Aulas" name="aulas"/>
           </q-tabs>
         </div>
       </div>
 
-      <q-separator />
+      <q-separator/>
 
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="aulas">
@@ -101,14 +118,14 @@ export default {
   name: "AulasMobile",
   data() {
     return {
-      tab: "aulas",
+      tab: "aulas"
     };
   },
   computed: {
     ...mapState("cursos", ["curso", "aula"]),
     cursoLocal: {
       get() {
-        return this.curso
+        return this.curso;
       }
     },
     aulaAtual: {
@@ -120,6 +137,18 @@ export default {
   methods: {
     ...mapActions("cursos", ["getAulasCurso", "setAula", "aulaFinalizada"]),
     ...mapActions("layout", ["setMostrarCabecalho"]),
+    getSourceVideo() {
+      if (this.aulaAtual.arquivo_video) {
+        let video = [
+          {
+            src: this.aulaAtual.arquivo_video,
+            type: "video/mp4"
+          }
+        ];
+        return video;
+      }
+      return this.tratarUrlVimeo();
+    },
     async init() {
       let cursoId = this.$route.params.id;
       let payload = {
@@ -150,7 +179,8 @@ export default {
     processarAulaFinalizada(aula, formHistoricoAula) {
       const form = {
         data: {
-          matricula: this.cursoLocal.matricula[0].id,
+          curso: this.cursoLocal.id,
+          // matricula: this.cursoLocal.matricula[0].id,
           aula: aula.id,
           finalizada: true
         },

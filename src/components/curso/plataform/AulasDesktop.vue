@@ -223,7 +223,8 @@ export default {
     processarAulaFinalizada(aula, formHistoricoAula) {
       const form = {
         data: {
-          matricula: this.cursoLocal.matricula[0].id,
+          curso: this.cursoLocal.id,
+          // matricula: this.cursoLocal.matricula[0].id,
           aula: aula.id,
           finalizada: true
         },
