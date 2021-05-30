@@ -2,23 +2,30 @@ name: CI
 
 on:
   push: {branches: master}
-  
-  workflow_dispatch:
 
+  workflow_dispatch:
+  
 env:
   BUCKET: efb-homo
 
 jobs:
-  job_1:
-    name: Build
+  build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
 
-    - run: npm install
-    - run: npm run build
-    # run: npm test
-    
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Build
+      run: yarn build
+
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@master
       with:
@@ -31,5 +38,3 @@ jobs:
 
     - name: Allow public access
       run: gsutil -m acl ch -R -u AllUsers:R gs://"$BUCKET"
-
-
