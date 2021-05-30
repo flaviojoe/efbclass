@@ -69,7 +69,7 @@ module.exports = function(ctx) {
           .plugin("eslint-webpack-plugin")
           .use(ESLintPlugin, [{ extensions: ["js", "vue"] }]);
       },
-      // distDir: ctx.mode.spa ? 'public' : null,
+      distDir: ctx.mode.spa ? 'public' : null,
     },
 
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
