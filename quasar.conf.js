@@ -43,7 +43,7 @@ module.exports = function(ctx) {
       env: ctx.dev
         ? { API: "http://192.168.0.109:8000/api" }
         // ? { API: "http://localhost:8000/api" }
-        : { API: "https://efbclass-hapi-veetnb4a2a-ue.a.run.app/api" },
+        : { API: "https://hapi.efbclass.com/api/" },
       vueRouterMode: "hash", // available values: 'hash', 'history'
 
       // transpile: false,
